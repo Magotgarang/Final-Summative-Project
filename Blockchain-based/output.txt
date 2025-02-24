@@ -1,0 +1,44 @@
+
+ckchain-based Job Directory Initialized...
+
+Creating the genesis block...
+Genesis block created with job listing:
+Job Title: Software Engineer
+Company: Tech Corp
+Location: New York
+Job Description: Develop cutting-edge software
+
+Blockchain Initialized.
+
+Adding new job listings...
+
+Job Title: Data Scientist
+Company: Data Innovators
+Location: San Francisco
+Job Description: Analyze and visualize large datasets
+New job listing added: Data Scientist | Data Innovators | San Francisco | Analyze and visualize large datasets
+
+Job Title: Web Developer
+Company: Web Solutions
+Location: Boston
+Job Description: Build and maintain websites and web applications
+New job listing added: Web Developer | Web Solutions | Boston | Build and maintain websites and web applications
+
+Searching for jobs with keyword "Developer"...
+
+Search results for "Developer":
+1. Job Title: Web Developer
+   Company: Web Solutions
+   Location: Boston
+   Job Description: Build and maintain websites and web applications
+
+Verifying blockchain integrity...
+
+Blockchain Integrity Check...
+Block 0: Software Engineer | Tech Corp | New York | Develop cutting-edge software
+Block 1: Data Scientist | Data Innovators | San Francisco | Analyze and visualize large datasets
+Block 2: Web Developer | Web Solutions | Boston | Build and maintain websites and web applications
+
+Blockchain is valid. No tampering detected.
+
+Program Terminated. Blockchain system working as expected.
