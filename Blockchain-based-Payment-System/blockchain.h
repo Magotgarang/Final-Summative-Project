@@ -6,17 +6,20 @@
 #include <string.h>
 #include <openssl/sha.h>
 
+// Define wallet structure
 typedef struct Wallet {
     char wallet_address[64];
     unsigned int balance;
 } Wallet;
 
+// Define transaction structure
 typedef struct Transaction {
     char sender[64];
     char receiver[64];
     unsigned int amount;
 } Transaction;
 
+// Define block structure
 typedef struct Block {
     unsigned int index;
     char previous_hash[64];
@@ -25,9 +28,9 @@ typedef struct Block {
     struct Block* next;
 } Block;
 
-// Function prototypes
-Wallet create_wallet();
-void add_transaction_to_blockchain(Transaction tx);
-void mine_block();
+// Function declarations
+char* hash_block(Block* block);
+void add_transaction_to_blockchain(Transaction tx, Wallet* sender, Wallet* receiver);
+void mine_block(Block* block);
 
-#endif
+#endif // BLOCKCHAIN_H

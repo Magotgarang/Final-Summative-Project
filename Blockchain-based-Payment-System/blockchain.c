@@ -1,4 +1,5 @@
 #include "blockchain.h"
+#include <openssl/sha.h>
 
 // Function to hash a block's data
 char* hash_block(Block* block) {
@@ -20,36 +21,30 @@ char* hash_block(Block* block) {
 }
 
 // Function to add transaction to blockchain
-void add_transaction(Block** blockchain, Transaction tx) {
+void add_transaction_to_blockchain(Transaction tx, Wallet* sender, Wallet* receiver) {
     Block* new_block = (Block*)malloc(sizeof(Block));
+    
+    // Assign transaction details to the new block
     new_block->transaction = tx;
-    new_block->index = *blockchain == NULL ? 0 : (*blockchain)->index + 1;
-    strcpy(new_block->previous_hash, (*blockchain) ? (*blockchain)->current_hash : "0");
+    new_block->index = 0;  // You can increment this based on the blockchain structure
 
-    // Hash the current block
-    char* current_hash = hash_block(new_block);
-    strcpy(new_block->current_hash, current_hash);
+    // Example: Set the initial values for the previous hash (can be adjusted based on your implementation)
+    strcpy(new_block->previous_hash, "0");
 
-    new_block->next = *blockchain;
-    *blockchain = new_block;
+    // Hash this block and set the current hash
+    strcpy(new_block->current_hash, hash_block(new_block));
+
+    // Add new block to blockchain (Here we just print it for demonstration)
+    printf("Transaction added to blockchain:\n");
+    printf("Sender: %s, Receiver: %s, Amount: %d\n", tx.sender, tx.receiver, tx.amount);
+
+    // Adjust sender and receiver balances based on transaction
+    sender->balance -= tx.amount;
+    receiver->balance += tx.amount;
 }
 
-// Function to mine a block (simulate the mining process)
-void mine_block() {
+// Example of mining a block (implementing mining logic)
+void mine_block(Block* block) {
     printf("Mining block...\n");
-    // Here you can simulate the mining process, such as adding some delay or simulating proof-of-work
-}
-
-// Function to create a wallet (this can generate random wallet addresses)
-Wallet create_wallet() {
-    Wallet wallet;
-    snprintf(wallet.wallet_address, sizeof(wallet.wallet_address), "wallet-%d", rand() % 10000);
-    wallet.balance = 1000; // Starting balance
-    return wallet;
-}
-
-// Function to add transaction to the blockchain
-void add_transaction_to_blockchain(Transaction tx) {
-    static Block* blockchain = NULL;
-    add_transaction(&blockchain, tx);
+    // Implement mining logic here (e.g., proof of work)
 }
