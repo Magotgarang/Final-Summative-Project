@@ -24,32 +24,32 @@ void add_transaction(Block** blockchain, Transaction tx) {
     Block* new_block = (Block*)malloc(sizeof(Block));
     new_block->transaction = tx;
     new_block->index = *blockchain == NULL ? 0 : (*blockchain)->index + 1;
+    strcpy(new_block->previous_hash, (*blockchain) ? (*blockchain)->current_hash : "0");
 
-    if (*blockchain == NULL) {
-        strcpy(new_block->previous_hash, "0");
-    } else {
-        strcpy(new_block->previous_hash, (*blockchain)->current_hash);
-    }
-    
-    strcpy(new_block->current_hash, hash_block(new_block));
+    // Hash the current block
+    char* current_hash = hash_block(new_block);
+    strcpy(new_block->current_hash, current_hash);
+
     new_block->next = *blockchain;
     *blockchain = new_block;
 }
 
-// Function to mine a block (simulating Proof of Work)
-void mine_block(Block** blockchain) {
-    // Simulate mining process
+// Function to mine a block (simulate the mining process)
+void mine_block() {
+    printf("Mining block...\n");
+    // Here you can simulate the mining process, such as adding some delay or simulating proof-of-work
 }
 
-// Function to view wallet balance
-void view_balance(Wallet* wallet) {
-    printf("Wallet address: %s\n", wallet->wallet_address);
-    printf("Balance: %u\n", wallet->balance);
+// Function to create a wallet (this can generate random wallet addresses)
+Wallet create_wallet() {
+    Wallet wallet;
+    snprintf(wallet.wallet_address, sizeof(wallet.wallet_address), "wallet-%d", rand() % 10000);
+    wallet.balance = 1000; // Starting balance
+    return wallet;
 }
 
-// Function to create a wallet
-void create_wallet(Wallet* wallet) {
-    // Generate a random wallet address (simplified)
-    sprintf(wallet->wallet_address, "wallet-%u", rand() % 10000);
-    wallet->balance = 1000; // Initial balance
+// Function to add transaction to the blockchain
+void add_transaction_to_blockchain(Transaction tx) {
+    static Block* blockchain = NULL;
+    add_transaction(&blockchain, tx);
 }

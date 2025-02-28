@@ -25,10 +25,9 @@ typedef struct Block {
     struct Block* next;
 } Block;
 
-void add_transaction(Block** blockchain, Transaction tx);
-void mine_block(Block** blockchain);
-void view_balance(Wallet* wallet);
-void create_wallet(Wallet* wallet);
-char* hash_block(Block* block);
+// Function prototypes
+Wallet create_wallet();
+void add_transaction_to_blockchain(Transaction tx);
+void mine_block();
 
 #endif
